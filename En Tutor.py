@@ -4,6 +4,8 @@ from pyttsx3 import speak as say
 from pyperclip import copy
 system('cls')
 score, total_positive, total_nigative, M = 0, 0, 0, 0
+
+
 class local():
     def __init__(self, file='null', col='null', Wrong=[], Right=[], T='null'):
         self.file = file
@@ -53,17 +55,22 @@ class local():
             print('something went wrong with clearing Data')
 
     def deff(self):
-        from PyDictionary import PyDictionary
-        from pyttsx3 import speak as say
-        dictionary = PyDictionary()
-        d = dictionary.meaning(self.T)
-        print(d)
-        say(d)
+        try:
+            from PyDictionary import PyDictionary
+            from pyttsx3 import speak as say
+            dictionary = PyDictionary()
+            d = dictionary.meaning(self.T)
+            print(d)
+            say(d)
+            say(self.T)
+        except:
+            print('no definition available')
+            say('sorry, no definition available')
 
 
-print('''\tWelcome to my EN.Tutor program for teaching the most used words in the English language.
-The program is designed to be simple, easy to use and to prevent any distractions
-      ''')
+print('''
+Welcome to my EN.Tutor program for teaching the most used words in the English language.
+The program is designed to be simple, easy to use and to prevent any distractions''')
 print('''
  ██████████                         mohamed7ossam@outlook.com                            
 ░███░░░░███                                                   
@@ -132,7 +139,6 @@ while True:
     else:
         print('please Enter a valid value')
 
-
 if G == 0:
     while True:
         if Wrong == [] and M == 1:
@@ -148,8 +154,8 @@ if G == 0:
             c = choice(words)
             if c not in Right:
                 print('\n\t\tyour score is: ', score)
-                x = input('\t\tinput: ')
                 say(c)
+                x = input('\t\tinput: ')
                 if x == '-clear':
                     print('\tare you sure you want to clear all saved Data?')
                     print('\tEnter [y/n]')
@@ -180,8 +186,8 @@ if G == 0:
                     total_positive += 1
                     score += 1
                 elif x == 'r':
-                    x = input('\t\tinput: ')
                     say(c)
+                    x = input('\t\tinput: ')
                     if x == c:
                         print('\n\t\tcorrect')
                         say('correct')
@@ -201,7 +207,6 @@ if G == 0:
                             Wrong.append(c)
                         score -= 1
                         total_nigative += 1
-
                 elif x == 'def':
                     say(c)
                     m_local = local('', '', '', '', c)
